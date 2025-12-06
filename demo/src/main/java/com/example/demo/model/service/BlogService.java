@@ -1,4 +1,5 @@
 package com.example.demo.model.service;
+
 //import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor // final 필드 자동 생성자 주입
+@SuppressWarnings("null")
 public class BlogService {
 
     @Autowired // 생성자 1개면 사실 생략 가능
@@ -18,7 +20,7 @@ public class BlogService {
 
     // 전체 목록 조회
     // public List<Board> findAll() {
-    //     return boardRepository2.findAll();
+    //     return boardRepository2.findAll();
     // }
 
     // 게시글 저장
@@ -46,9 +48,10 @@ public class BlogService {
     }
 
     public Page<Board> findAll(Pageable pageable) {
-    return boardRepository2.findAll(pageable);
+        return boardRepository2.findAll(pageable);
     }
+
     public Page<Board> searchByKeyword(String keyword, Pageable pageable) {
-    return boardRepository2.findByTitleContainingIgnoreCase(keyword, pageable);
+        return boardRepository2.findByTitleContainingIgnoreCase(keyword, pageable);
     } // LIKE 검색 제공(대소문자 무시)
 }

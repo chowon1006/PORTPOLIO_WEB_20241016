@@ -13,14 +13,13 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Transactional
 @RequiredArgsConstructor
+@SuppressWarnings("null")
 public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    /**
-     * 이메일 중복 체크
-     */
+    //이메일 중복 체크
     private void validateDuplicateMember(AddMemberRequest request) {
 
         // MemberRepository에서 findByEmail을 Optional로 반환한다면 아래처럼 변경해야 함.
@@ -31,9 +30,7 @@ public class MemberService {
         }
     }
 
-    /**
-     * 회원가입 저장
-     */
+    // 회원 가입
     public Member saveMember(@Valid AddMemberRequest request) {
 
         // 중복 이메일 검증
@@ -47,9 +44,8 @@ public class MemberService {
         return memberRepository.save(request.toEntity());
     }
 
-    /**
-     * 로그인 체크
-     */
+    //로그인 체크
+
     public Member loginCheck(String email, String rawPassword) {
 
         Member member = memberRepository.findByEmail(email);
